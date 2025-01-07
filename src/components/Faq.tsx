@@ -17,19 +17,15 @@ export default function Card({ href, frontmatter, secHeading = true }: Props) {
   };
 
   return (
-    <li className="my-6">
-      <a
-        href={href}
-        className="inline-block text-lg font-medium text-skin-accent decoration-dashed underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0"
-      >
-        {secHeading ? (
-          <h2 {...headerProps}>{title}</h2>
-        ) : (
-          <h3 {...headerProps}>{title}</h3>
-        )}
-      </a>
-      <Datetime pubDatetime={pubDatetime} modDatetime={modDatetime} />
-      <p>FAQ: {description}</p>
-    </li>
+    <div className="faq-item">
+    <div className="faq-question">
+        What is Tesla FAQ?
+        <span className="faq-toggle"></span>
+    </div>
+    <div className="faq-answer">
+        Tesla FAQ is a community-driven resource to answer common questions about Tesla vehicles and technology.
+    </div>
+    </div>
   );
 }
+
