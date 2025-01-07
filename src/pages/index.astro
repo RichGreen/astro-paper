@@ -23,7 +23,7 @@ const socialCount = SOCIALS.filter(social => social.active).length;
   <Header />
   <main id="main-content">
     <section id="hero">
-      <h1>Mingalaba</h1>
+      <h1>Tesla FAQ</h1>
       <a
         target="_blank"
         href="/rss.xml"
@@ -42,20 +42,13 @@ const socialCount = SOCIALS.filter(social => social.active).length;
       </a>
 
       <p>
-        AstroPaper is a minimal, responsive, accessible and SEO-friendly Astro
-        blog theme. This theme follows best practices and provides accessibility
-        out of the box. Light and dark mode are supported by default. Moreover,
-        additional color schemes can also be configured.
+        
+This site features a curated list of the most frequently asked questions, commonly seen in Facebook groups.
+</p>
+<p>
+By gathering these questions in one place, it saves you time searching through posts and provides clear, accurate answers quickly – helping you stay informed and make better decisions faster.
       </p>
-      <p>
-        Read the blog posts or check
-        <LinkButton
-          className="underline decoration-dashed underline-offset-4 hover:text-skin-accent"
-          href="https://github.com/satnaing/astro-paper#readme"
-        >
-          README
-        </LinkButton> for more info.
-      </p>
+
       {
         // only display if at least one social link is enabled
         socialCount > 0 && (
@@ -67,8 +60,11 @@ const socialCount = SOCIALS.filter(social => social.active).length;
       }
     </section>
 
-    <section>
+    <section id="featured">
+      <h2>Featured</h2>
       <div class="faq-container">
+
+
         <div class="faq-item">
             <div class="faq-question">
                 What is Tesla FAQ?
@@ -78,15 +74,26 @@ const socialCount = SOCIALS.filter(social => social.active).length;
                 Tesla FAQ is a community-driven resource to answer common questions about Tesla vehicles and technology.
             </div>
         </div>
-        <div class="faq-item">
-            <div class="faq-question">
-                How often is the FAQ updated?
-                <span class="faq-toggle"></span>
-            </div>
-            <div class="faq-answer">
-                The FAQ is updated regularly to reflect the latest information and user feedback.
-            </div>
-        </div>
+
+        {featuredPosts.map(({ data, slug }) => (
+        <Faq
+          href={`/posts/${slug}/`}
+          frontmatter={data}
+          secHeading={false}
+        />
+      ))}
+
+<div class="faq-item">
+  <div class="faq-question">
+      What is Tesla FAQ2?
+      <span class="faq-toggle"></span>
+  </div>
+  <div class="faq-answer">
+      !!Tesla FAQ is a community-driven resource to answer common questions about Tesla vehicles and technology.
+  </div>
+</div>
+
+
       </div>
     </section>
 
@@ -194,50 +201,4 @@ const socialCount = SOCIALS.filter(social => social.active).length;
     @apply my-8 text-center;
   }
 
-    /* ===== FAQ Section ===== */
-
-    .faq-container {
-            max-width: 800px;
-            margin: 2rem auto;
-        }
-
-        .faq-item {
-            border-bottom: 1px solid #ddd;
-            margin-bottom: 1rem;
-        }
-
-        .faq-question {
-            font-size: 1.2rem;
-            font-weight: bold;
-            cursor: pointer;
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .faq-question:hover {
-            background-color: #f1f1f1;
-        }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            padding: 0 1rem;
-        }
-
-        .faq-item.active .faq-answer {
-            max-height: 200px;
-            padding: 1rem;
-        }
-
-        .faq-toggle::after {
-            content: '\002B'; /* Plus sign */
-            font-size: 1.5rem;
-        }
-
-        .faq-item.active .faq-toggle::after {
-            content: '\2212'; /* Minus sign */
-        }
 </style>
