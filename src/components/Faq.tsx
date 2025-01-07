@@ -19,11 +19,11 @@ export default function Card({ href, frontmatter, secHeading = true }: Props) {
   return (
     <div className="faq-item">
     <div className="faq-question">
-        What is Tesla FAQ?
+        {title}
         <span className="faq-toggle"></span>
     </div>
     <div className="faq-answer">
-        Tesla FAQ is a community-driven resource to answer common questions about Tesla vehicles and technology.
+      {description}
     </div>
     </div>
   );
