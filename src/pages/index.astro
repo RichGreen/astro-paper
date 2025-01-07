@@ -63,18 +63,6 @@ By gathering these questions in one place, it saves you time searching through p
     <section id="featured">
       <h2>Featured</h2>
       <div class="faq-container">
-
-
-        <div class="faq-item">
-            <div class="faq-question">
-                What is Tesla FAQ?
-                <span class="faq-toggle"></span>
-            </div>
-            <div class="faq-answer">
-                Tesla FAQ is a community-driven resource to answer common questions about Tesla vehicles and technology.
-            </div>
-        </div>
-
         {featuredPosts.map(({ data, slug }) => (
         <Faq
           href={`/posts/${slug}/`}
@@ -82,18 +70,6 @@ By gathering these questions in one place, it saves you time searching through p
           secHeading={false}
         />
       ))}
-
-<div class="faq-item">
-  <div class="faq-question">
-      What is Tesla FAQ2?
-      <span class="faq-toggle"></span>
-  </div>
-  <div class="faq-answer">
-      !!Tesla FAQ is a community-driven resource to answer common questions about Tesla vehicles and technology.
-  </div>
-</div>
-
-
       </div>
     </section>
 
