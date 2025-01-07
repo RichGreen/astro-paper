@@ -4,7 +4,6 @@ pubDatetime: 2024-09-08T20:58:52.737Z
 title: Adding LaTeX Equations in AstroPaper blog posts
 featured: false
 tags:
-  - rendering
   - docs
 description: How to use LaTeX equations in your Markdown files for AstroPaper.
 ---

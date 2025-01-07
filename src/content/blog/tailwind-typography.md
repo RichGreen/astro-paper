@@ -5,8 +5,7 @@ pubDatetime: 2022-07-05T02:05:51Z
 featured: false
 draft: false
 tags:
-  - TypeScript
-  - Astro
+  - Charging
 description: "EXAMPLE POST: About Tailwind Typography Plugin and how you can use it effectively."
 ---
 
