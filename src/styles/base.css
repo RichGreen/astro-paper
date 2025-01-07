@@ -125,3 +125,51 @@
     @apply outline-2 outline-offset-1 outline-skin-fill focus-visible:no-underline focus-visible:outline-dashed;
   }
 }
+
+
+    /* ===== FAQ Section ===== */
+
+    .faq-container {
+      max-width: 800px;
+      margin: 2rem auto;
+  }
+
+  .faq-item {
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 1rem;
+  }
+
+  .faq-question {
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+
+  /* .faq-question:hover {
+      background-color: #f1f1f1;
+  } */
+
+  .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      padding: 0 1rem;
+  }
+
+  .faq-item.active .faq-answer {
+      max-height: 200px;
+      padding: 1rem;
+  }
+
+  .faq-toggle::after {
+      content: '\002B'; /* Plus sign */
+      font-size: 1.5rem;
+  }
+
+  .faq-item.active .faq-toggle::after {
+      content: '\2212'; /* Minus sign */
+  }
