@@ -5,7 +5,7 @@ import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import LinkButton from "@components/LinkButton.astro";
 import Hr from "@components/Hr.astro";
-import Card from "@components/Card";
+import Faq from "@components/Faq";
 import Socials from "@components/Socials.astro";
 import getSortedPosts from "@utils/getSortedPosts";
 import { SITE, SOCIALS } from "@config";
@@ -67,6 +67,29 @@ const socialCount = SOCIALS.filter(social => social.active).length;
       }
     </section>
 
+    <section>
+      <div class="faq-container">
+        <div class="faq-item">
+            <div class="faq-question">
+                What is Tesla FAQ?
+                <span class="faq-toggle"></span>
+            </div>
+            <div class="faq-answer">
+                Tesla FAQ is a community-driven resource to answer common questions about Tesla vehicles and technology.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                How often is the FAQ updated?
+                <span class="faq-toggle"></span>
+            </div>
+            <div class="faq-answer">
+                The FAQ is updated regularly to reflect the latest information and user feedback.
+            </div>
+        </div>
+      </div>
+    </section>
+
     <Hr />
 
     {
@@ -76,7 +99,7 @@ const socialCount = SOCIALS.filter(social => social.active).length;
             <h2>Featured</h2>
             <ul>
               {featuredPosts.map(({ data, slug }) => (
-                <Card
+                <Faq
                   href={`/posts/${slug}/`}
                   frontmatter={data}
                   secHeading={false}
@@ -97,7 +120,7 @@ const socialCount = SOCIALS.filter(social => social.active).length;
             {recentPosts.map(
               ({ data, slug }, index) =>
                 index < SITE.postPerIndex && (
-                  <Card
+                  <Faq
                     href={`/posts/${slug}/`}
                     frontmatter={data}
                     secHeading={false}
@@ -122,6 +145,16 @@ const socialCount = SOCIALS.filter(social => social.active).length;
   </main>
 
   <Footer />
+
+  <script>
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+        item.addEventListener('click', () => {
+            item.classList.toggle('active');
+        });
+    });
+</script>
 </Layout>
 
 <style>
@@ -160,4 +193,51 @@ const socialCount = SOCIALS.filter(social => social.active).length;
   .all-posts-btn-wrapper {
     @apply my-8 text-center;
   }
+
+    /* ===== FAQ Section ===== */
+
+    .faq-container {
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 1rem;
+        }
+
+        .faq-question {
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question:hover {
+            background-color: #f1f1f1;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 1rem;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding: 1rem;
+        }
+
+        .faq-toggle::after {
+            content: '\002B'; /* Plus sign */
+            font-size: 1.5rem;
+        }
+
+        .faq-item.active .faq-toggle::after {
+            content: '\2212'; /* Minus sign */
+        }
 </style>
