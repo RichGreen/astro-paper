@@ -4,7 +4,7 @@ import Layout from "@layouts/Layout.astro";
 import Header from "@components/faq_Header.astro";
 import Footer from "@components/Footer.astro";
 import LinkButton from "@components/LinkButton.astro";
-import Hr from "@components/Hr.astro";
+import HrAstro from "@components/Hr.astro";
 import Faq from "@components/Faq";
 import Socials from "@components/Socials.astro";
 import getSortedPosts from "@utils/getSortedPosts";
@@ -24,37 +24,28 @@ const socialCount = SOCIALS.filter(social => social.active).length;
 console.log('here is the console log youve been looking for');
 //console.log(featuredPosts);
 
+// Group posts by tags
 const groupedPosts = featuredPosts.reduce((acc: { [key: string]: typeof featuredPosts }, post) => {
   const { tags } = post.data || {};
 
-  console.log('Tags for post:', tags);
-
   if (tags && Array.isArray(tags)) {
     tags.forEach(tag => {
-      console.log(`Processing tag: ${tag}, type: ${typeof tag}`);
-      
-      if (typeof tag !== 'string') {
-        console.error(`Skipping non-string tag:`, tag);
-        return;
-      }
-
-      // Create a new object if needed
-      if (Object.isFrozen(acc)) {
-        acc = { ...acc };  // Clone acc if frozen
-      }
-
-      // Initialize array
       acc[tag] = acc[tag] || [];
-      
-      console.log(`Pushing post with title "${post.data.title}" to tag: ${tag}`);
       acc[tag].push(post);
     });
   }
 
   return acc;
-}, {});  // Initialize as mutable object
+}, {});
 
-console.log("Grouped posts:", groupedPosts);
+// Render grouped posts
+Object.entries(groupedPosts).forEach(([tag, posts]) => {
+  console.log(`\n### ${tag} ###`);
+  posts.forEach(post => {
+    console.log(`- ${post.data.title}`);
+  });
+});
+
 
 
 
@@ -108,6 +99,30 @@ By gathering these questions in one place, it saves you time searching through p
       }
     </section>
 
+
+    <!--Featured posts by Tag-->
+    {Object.entries(groupedPosts).map(([tag, posts], index) => (
+      <>
+         {index > 0 && <HrAstro />}
+        <section id="featured">
+          <h2>{tag.charAt(0).toUpperCase() + tag.slice(1)}</h2>  {/* Capitalize the first letter */}
+          <div class="faq-container">
+            {posts.map(({ data, slug }) => (
+              <Faq
+                href={`/posts/${slug}/`}
+                frontmatter={data}
+                secHeading={false}
+              />
+            ))}
+          </div>
+        </section>
+      </>
+    ))}
+    
+    <HrAstro/>
+
+
+
     <section id="featured">
       <h2>Featured</h2>
       <div class="faq-container">
@@ -121,7 +136,7 @@ By gathering these questions in one place, it saves you time searching through p
       </div>
     </section>
 
-    <Hr />
+    <HrAstro />
 
     {
       featuredPosts.length > 0 && (
@@ -138,7 +153,7 @@ By gathering these questions in one place, it saves you time searching through p
               ))}
             </ul>
           </section>
-          {recentPosts.length > 0 && <Hr />}
+          {recentPosts.length > 0 && <HrAstro />}
         </>
       )
     }
