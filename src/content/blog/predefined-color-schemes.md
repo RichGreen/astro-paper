@@ -4,10 +4,10 @@ pubDatetime: 2022-09-26T12:13:24Z
 modDatetime: 2024-01-04T09:09:06Z
 title: Predefined color schemes
 slug: predefined-color-schemes
-featured: false
+featured: true
 draft: false
 tags:
-  - Charging
+  - docs
 description:
   Some of the well-crafted, predefined color schemes for AstroPaper blog
   theme.
