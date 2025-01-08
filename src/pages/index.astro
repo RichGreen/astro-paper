@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
-import Header from "@components/Header.astro";
+import Header from "@components/faq_Header.astro";
 import Footer from "@components/Footer.astro";
 import LinkButton from "@components/LinkButton.astro";
 import Hr from "@components/Hr.astro";
@@ -17,6 +17,54 @@ const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 
 const socialCount = SOCIALS.filter(social => social.active).length;
+
+//Get all categories and then loop through featured posts within them
+
+
+console.log('here is the console log youve been looking for');
+//console.log(featuredPosts);
+
+const groupedPosts = featuredPosts.reduce((acc: { [key: string]: typeof featuredPosts }, post) => {
+  const { tags } = post.data || {};
+
+  console.log('Tags for post:', tags);
+
+  if (tags && Array.isArray(tags)) {
+    tags.forEach(tag => {
+      console.log(`Processing tag: ${tag}, type: ${typeof tag}`);
+      
+      if (typeof tag !== 'string') {
+        console.error(`Skipping non-string tag:`, tag);
+        return;
+      }
+
+      // Create a new object if needed
+      if (Object.isFrozen(acc)) {
+        acc = { ...acc };  // Clone acc if frozen
+      }
+
+      // Initialize array
+      acc[tag] = acc[tag] || [];
+      
+      console.log(`Pushing post with title "${post.data.title}" to tag: ${tag}`);
+      acc[tag].push(post);
+    });
+  }
+
+  return acc;
+}, {});  // Initialize as mutable object
+
+console.log("Grouped posts:", groupedPosts);
+
+
+
+console.log('console log wed');
+
+
+
+
+
+
 ---
 
 <Layout>
